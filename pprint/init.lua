@@ -5,8 +5,6 @@
 
 require 'util'
 
-pprint = {}
-
 -- Wraps quoted strings in apostraphes
 local function smart_quote(str)
   if string.match( string.gsub(str,"[^'\"]",""), '^"+$' ) then
@@ -253,13 +251,22 @@ function Printer:put_key(k)
 end
 
 
-function pretty_string(t, depth)
+local function pretty_string(t, depth)
   depth = depth or 4
   return tostring(Printer:new(t, depth))
 end
 
 
-function pprint(data, depth)
+local function pprint_pprint(self, data, depth)
     print(pretty_string(data, depth))
 end
+
+pprint = {
+    pretty_string=pretty_string,
+    __call=pprint_pprint,
+}
+
+
+setmetatable(pprint, pprint)
+
 
