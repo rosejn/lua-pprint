@@ -231,7 +231,13 @@ function Printer:put_value(v)
   if tv == 'string' then
     self:puts(smart_quote(unescape(v)))
   elseif tv == 'number' or tv == 'boolean' or tv == 'nil' then
-    self:puts(tostring(v))
+    if v == math.huge then
+      self:puts('math.huge')
+    elseif v == -math.huge then
+      self:puts('-math.huge')
+    else
+      self:puts(tostring(v))
+    end
   elseif tv == 'table' then
     self:put_table(v)
   elseif util.is_tensor(v) then
