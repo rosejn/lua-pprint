@@ -270,17 +270,17 @@ end
 pprint = {
     pretty_string=pretty_string,
     __call=pprint_pprint,
-   printer = function(depth) depth = depth or 4
-		local function pretty_string(...)
-		   local str_table = {}
-		   for i = 1,select('#',...) do
-		      local obj = select(i,...)
-		      table.insert(str_table, tostring(Printer:new(obj, depth)))
-		   end
-		   return table.concat(str_table,' ')
-		end
-		return pretty_string
-	     end
+    printer = function(depth) depth = depth or 4
+        local function pretty_string(...)
+            local str_table = {}
+            for i = 1,select('#',...) do
+                local obj = select(i,...)
+               table.insert(str_table, tostring(Printer:new(obj, depth)))
+            end
+            return table.concat(str_table,' ')
+        end
+        return pretty_string
+    end
 }
 
 
